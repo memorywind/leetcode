@@ -1,0 +1,28 @@
+package leetcode200;
+
+public class demo {
+    public int numIslands(char[][] grid) {
+        int ans = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == '1') { // 找到新的岛屿
+                    dfs(grid, i, j); // 这个岛插满旗子，这样后面遍历到的 '1' 一定是新的岛
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+
+    private void dfs(char[][] grid, int i, int j) {
+        // 出界，或者不是 '1'，就不再往下递归
+        if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] != '1') {
+            return;
+        }
+        grid[i][j] = '2'; // 插旗！避免来回横跳无限递归
+        dfs(grid, i, j - 1); // 往左走
+        dfs(grid, i, j + 1); // 往右走
+        dfs(grid, i - 1, j); // 往上走
+        dfs(grid, i + 1, j); // 往下走
+    }
+}

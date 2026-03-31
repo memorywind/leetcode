@@ -39,8 +39,8 @@ public class demo {
     }
 
     public ListNode merge(ListNode l1, ListNode l2) {
-        ListNode dummy = new ListNode(0);
-        ListNode cur = dummy;
+        ListNode dummy = new ListNode(0); // 虚拟节点
+        ListNode cur = dummy; // 指针
         while (l1 != null && l2 != null) {
             if (l1.val < l2.val) {
                 cur.next = l1;
@@ -51,7 +51,7 @@ public class demo {
             }
             cur = cur.next;
         }
-        if (l1 != null) cur.next = l1;
+        if (l1 != null) cur.next = l1; // l2走完了，剩下一个l1，是最大的
         if (l2 != null) cur.next = l2;
         return dummy.next;
     }
